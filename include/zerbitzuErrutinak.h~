@@ -1,0 +1,27 @@
+/*-------------------------------------
+zerbitzuErrutinak.h
+-------------------------------------*/
+
+extern void tekEten ();
+void tenpEten()
+{
+	static int tik=0;
+	static int seg=0;
+
+	if (EGOERA==1)
+	{
+		tik++;
+		if (tik==5)
+		{
+			seg ++;
+			iprintf("\x1b[33;5HPasa diren segunduak=%d", seg);
+		}
+	}
+}
+
+void etenZerbErrutEzarri()
+{
+	irqSet(IRQ_TIMER0, tenpEten);
+	irqSet(IRQ_KEYS, tekEten);	
+}
+
