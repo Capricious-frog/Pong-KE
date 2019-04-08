@@ -25,10 +25,10 @@ void memoriaErreserbatu()
 /* Pixel bakoitzak har ditzakeen 256 balioetako bakoitzari kolore bat esleitu PANTAILA NAGUSIAN. 0 balioa gardena da 
    eta definitu gabeko balioak beltzak. SPRITEARI KOLOREAK ESLEITZEKO ALDATU*/
 void PaletaNagusiaEzarri() {
-
 	SPRITE_PALETTE[1] = RGB15(31,0,0); // 1 baliodun pixelak gorriak izango dira.
 	SPRITE_PALETTE[2] = RGB15(0,31,0); // 2 baliodun pixelak berdeak izango dira.
 	SPRITE_PALETTE[3] = RGB15(0,0,31); // 3 baliodun pixelak urdinak izango dira.
+	SPRITE_PALETTE[4] = RGB15(33, 150, 243); // 4 baliodun pixelak urdin argiak izango dira.
 }
 
 /* 16x16 pixeleko Sprite baten definizioa erronbo bat marrazteko */
@@ -95,6 +95,11 @@ u8 erronboHandia[1024] =
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,	
 };
 
+u8 paloteUrdina[256] =
+{
+
+};
+
 /* Irudikatutako Spriteak memorian kargatzen ditu. SPRITE bat baino gehiago erakusteko
 for bana egin behar da.*/
 
@@ -118,7 +123,7 @@ int i;
 
 void ErakutsiErronboa(int indizea, int x, int y)
 { 
- 
+
 oamSet(&oamMain, //main graphics engine context
 		indizea,           //oam index (0 to 127)  
 		x, y,   //x and y pixle location of the sprite
