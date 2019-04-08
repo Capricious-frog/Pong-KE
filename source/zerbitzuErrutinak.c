@@ -11,16 +11,16 @@ periferikoak.c
 
 int EGOERA;
 int seg3;
-int x = 250; // TODO: Que es x?
+int x = 250; // TODO: No se utiliza.
 
 void tekEten ()
 {
 	// El codigo que venia
 	/*if (EGOERA == ITXITA)
 	{	
-		if (SakatutakoTekla()==A)
+		if (SakatutakoTekla() == A)
 		{
-			EGOERA=IREKITA;
+			EGOERA = IREKITA;
 			iprintf("\x1b[13;5HPasa diren segunduak=0");
 			erakutsiAteaIrekita();
 			seg3=0;
@@ -35,17 +35,12 @@ void tekEten ()
 		EGOERA = 2;
 		ErlojuaMartxanJarri();
 		erakutsiPato();
-
-
 	}
 
 	if (SakatutakoTekla() == SELECT)
 	{
 		EGOERA = 0;
-
 		EzabatuErronboHandia(1, 0, 150);
-
-
 	}
 }
 

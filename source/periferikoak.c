@@ -7,21 +7,21 @@ periferikoak.c
 #include "definizioak.h"
 
 
-int tekla; //sakatutako tekla gordetzeko aldagaia
+int tekla; // sakatutako tekla gordetzeko aldagaia
 
 
 
 int TeklaDetektatu() 
 {
-	//TRUE itzultzen du teklaren bat sakatu dela detektatzen badu
+	// TRUE itzultzen du teklaren bat sakatu dela detektatzen badu
 	return (~TEKLAK_DAT & 0x03ff) != 0);
 }
 
 int SakatutakoTekla() 
 {
 
-	//Sakatutako teklaren balioa itzultzen du: A=0;B=1;Select=2;Start=3;Esk=4;Ezk=5;
-	//Gora=6;Behera=7;R=8;L=9;
+	// Sakatutako teklaren balioa itzultzen du: A=0;B=1;Select=2;Start=3;Esk=4;Ezk=5;
+	// Gora=6;Behera=7;R=8;L=9;
 
 
 	if ((TEKLAK_DAT & 0x0001) == 0) return A;
@@ -39,13 +39,13 @@ int SakatutakoTekla()
 
 void konfiguratuTeklatua(int TEK_konf)
 {
-	//Teklatuaren konfigurazioa bere S/I erregistroak aldatuz
+	// Teklatuaren konfigurazioa bere S/I erregistroak aldatuz
 	TEKLAK_KNT = TEKLAK_KNT | TEK_konf;
 }
 
 void konfiguratuTenporizadorea(int Latch, int TENP_konf)
 {
-	//Tenporizadorearen konfigurazioa bere S/I erregistroak aldatuz
+	// Tenporizadorearen konfigurazioa bere S/I erregistroak aldatuz
 	DENB0_DAT = Latch;
 	DENB0_KNT = DENB0_KNT | TENP_konf;
 	
@@ -54,8 +54,8 @@ void konfiguratuTenporizadorea(int Latch, int TENP_konf)
 
 void TekEtenBaimendu()
 {
-	//Teklatuaren etenak baimendu
-	//Lan hau burutzeko lehenengo eten guztiak galarazi behar dira eta bukaeran baimendu 
+	// Teklatuaren etenak baimendu
+	// Lan hau burutzeko lehenengo eten guztiak galarazi behar dira eta bukaeran baimendu 
 	IME=0;
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
 	IE = IE | 0x00001000;
@@ -76,8 +76,8 @@ void TekEtenGalarazi()
 void DenbEtenBaimendu()
 {
 
-//Denboragailu baten etenak baimendu (Timer0)
-//Horretarako lehenengo eten guztiak galarazi eta bukaeran berriro baimendu
+	// Denboragailu baten etenak baimendu (Timer0)
+	// Horretarako lehenengo eten guztiak galarazi eta bukaeran berriro baimendu
 	IME=0;
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
 	IE = IE | 0x00000008;
@@ -87,8 +87,8 @@ void DenbEtenBaimendu()
 void DenbEtenGalarazi()
 {
 
-//Denboragailu baten etenak galarazi (Timer0)
-//Horretarako lehenengo eten guztiak galarazi eta bukaeran berriro baimendu
+	// Denboragailu baten etenak galarazi (Timer0)
+	// Horretarako lehenengo eten guztiak galarazi eta bukaeran berriro baimendu
 	IME=0;
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
 	IE = IE & 0xFFFFFFF7;
