@@ -48,8 +48,6 @@ void konfiguratuTenporizadorea(int Latch, int TENP_konf)
 	// Tenporizadorearen konfigurazioa bere S/I erregistroak aldatuz
 	DENB0_DAT = Latch;
 	DENB0_KNT = DENB0_KNT | TENP_konf;
-	
-	
 }
 
 void TekEtenBaimendu()
