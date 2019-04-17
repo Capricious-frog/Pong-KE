@@ -16,12 +16,17 @@ automatikoki sortzen dira, konpilatzerako garaian, baina horretarako gogoratu be
 #include "Atea.h"
 #include "AteaIrekita.h"
 #include "fondoa.h"
+#include "Galtzailea.h"
+#include "Irabazlea.h"
+#include "Pausa.h"
+#include "hasiera.h"
 
 /* irudiak memorian kopiatzeko DMA kanala aukeratu (3.a) */
 static const int DMA_CHANNEL = 3;
 
 /* Pantailaratu nahi den grafiko bakoitzerako horrelako prozedura bat idatzi behar da */
 
+//Atea adibidea
 void erakutsiAtea() {
 	
 	dmaCopyHalfWords(DMA_CHANNEL,
@@ -30,12 +35,42 @@ void erakutsiAtea() {
                      AteaBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
 }
 
+
 void erakutsiAteaIrekita() {
 		
     dmaCopyHalfWords(DMA_CHANNEL,
                      AteaIrekitaBitmap, /* Automatikoki sortzen den aldagaia */
                      (uint16 *)BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
                      AteaIrekitaBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
+}
+
+//Gure jokoa
+void erakutsiMenua() {
+	dmaCopyHalfWords(DMA_CHANNEL,
+                     hasieraBitmap, /* Automatikoki sortzen den aldagaia */
+                     (uint16 *)BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
+                     hasieraBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
+}
+
+void erakutsiIrabazlea() {
+	dmaCopyHalfWords(DMA_CHANNEL,
+                     IrabazleaBitmap, /* Automatikoki sortzen den aldagaia */
+                     (uint16 *)BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
+                     IrabazleaBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
+}
+
+void erakutsiGaltzailea() {
+	dmaCopyHalfWords(DMA_CHANNEL,
+                     GaltzaileaBitmap, /* Automatikoki sortzen den aldagaia */
+                     (uint16 *)BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
+                     GaltzaileaBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
+}
+
+void erakutsiPausa() {
+	dmaCopyHalfWords(DMA_CHANNEL,
+                     PausaBitmap, /* Automatikoki sortzen den aldagaia */
+                     (uint16 *)BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
+                     PausaBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
 }
 
 void erakutsiFondoa() {
