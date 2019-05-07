@@ -281,7 +281,7 @@ oamSet(&oamMain, //main graphics engine context
 		gfxpaloteUrdina,//+16*16/2,                  //pointer to the loaded graphics
 		-1,                  //sprite rotation data  
 		false,               //double the size when rotating?
-		true,			//hide the sprite?
+		false,			//hide the sprite?
 		false, false, //vflip, hflip
 		false	//apply mosaic
 		); 
@@ -302,7 +302,7 @@ oamSet(&oamMain, //main graphics engine context
 		gfxpaloteGorria,//+16*16/2,                  //pointer to the loaded graphics
 		-1,                  //sprite rotation data  
 		false,               //double the size when rotating?
-		true,			//hide the sprite?
+		false,			//hide the sprite?
 		false, false, //vflip, hflip
 		false	//apply mosaic
 		); 
@@ -323,7 +323,7 @@ oamSet(&oamMain, //main graphics engine context
 		gfxpelotaMorea,//+16*16/2,                  //pointer to the loaded graphics
 		-1,                  //sprite rotation data  
 		false,               //double the size when rotating?
-		true,			//hide the sprite?
+		false,			//hide the sprite?
 		false, false, //vflip, hflip
 		false	//apply mosaic
 		); 
