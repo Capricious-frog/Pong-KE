@@ -14,7 +14,7 @@ int tekla; // sakatutako tekla gordetzeko aldagaia
 int TeklaDetektatu() 
 {
 	// TRUE itzultzen du teklaren bat sakatu dela detektatzen badu
-	return (~TEKLAK_DAT & 0x03ff) != 0);
+	return ((~TEKLAK_DAT & 0x03ff) != 0);
 }
 
 int SakatutakoTekla() 

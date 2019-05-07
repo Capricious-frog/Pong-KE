@@ -71,171 +71,87 @@ void jokoa01()
 		/*************************************1.JARDUERAN**************************************/
 		//Hemen teklatuaren inkesta egin, sakatu den tekla pantailaratu, eta START
 		//sakatzean egoera aldatu
-	
+
+    
+	    // Menua
 		if (EGOERA == 0)
-		{
-			EzabatuErronboHandia(1, 160, 0);
-			EzabatuErronboHandia(2, 180, 0);
-			EzabatuErronboHandia(3, 110, 0);
-			EzabatuErronboa(5, t, z);
-			EzabatuErronboa(4, y, x);
-			erakutsiMenu();
+        {
+            int menuaKargatua = false;
 
-			touchRead(&PANT_DAT);
-			if ((PANT_DAT.px) != 0 || (PANT_DAT.py != 0))
-			{
-				EGOERA = 2;
-				ErlojuaMartxanJarri();
-				erakutsiPato();
-			}
-		}
+            // TODO Llamarlo desde la funcion que carga el menu
+            if (!menuaKargatua)
+            {
+                touchRead(&PANT_DAT);
+                erakutsiMenua();
+                menuaKargatua = true;
+            }
 
-
-		if (EGOERA == 2)
-		{
-			//Sprite nagusiaren mugimendua posizioka kudeatu dugu errezago izan dadin.
-			if (SakatutakoTekla() == GORA && Pos != 0 && tempmov == 0)
-			{
-				Pos = Pos - 1;
-				tempmov = 500;
-			}
-			if (SakatutakoTekla() == BEHERA && Pos != 4 && tempmov == 0)
-			{
-				Pos = Pos + 1;
-				tempmov = 500;
-			}
-			if (tempmov > 0) {
-				tempmov = tempmov - 1;
-			}
-
-			iprintf("\x1b[16;5H");
-
-			if (Pos == 0) {
-				ErakutsiErronboHandia(1, 34, 0);
-			}
-			if (Pos == 1) {
-				ErakutsiErronboHandia(1, 68, 0);
-			}
-			if (Pos == 2) {
-				ErakutsiErronboHandia(1, 100, 0);
-			}
-			if (Pos == 3) {
-				ErakutsiErronboHandia(1, 134, 0);
-			}
-			if (Pos == 4) {
-				ErakutsiErronboHandia(1, 168, 0);
-			}
-
-			if (eraso == 0) {
-				ErakutsiErronboa(3, 34, x);
-				x = 50 - (tik1 * 25);//*
-
-				//Sprit-a hasierara itzultzeko
-				if (x == 0) {
-					x = 250;
-				}
-
-				ErakutsiErronboa(4, 68, b);
-				b = 225 - (tik1 * 25);
-
-				//Sprit-a hasierara itzultzeko
-				if (b == 0) {
-					b = 250;
-				}
-
-				ErakutsiErronboa(5, 100, y);
-				y = 200 - (tik1 * 25);
-
-				//Spritea hasierara itzultzeko
-				if (y == 0) {
-					y = 250;
-				}
-
-				ErakutsiErronboa(6, 134, z);
-				z = 100 - (tik1 * 25);
-
-				//Spritea hasierara itzultzeko
-				if (z == 0) {
-					z = 250;
-				}
-
-				ErakutsiErronboa(7, 168, a);
-				a = 125 - (tik1 * 25);
-
-				//Spritea hasierara itzultzeko
-				if (a == 0) {
-					a = 250;
-				}
+			if (PANT_DAT.px != 0 || PANT_DAT.py != 0)
+            {
+                //iprintf("\x1b[22;5HHau idazte proba bat da");
+				ErakutsiErronboa(1, 30, 30);
+				
+				EGOERA = 1; //Jokoa
+            }
+        }
 
 
-				 // hauek dira jokoa amaituko diren kasuak. If hauek bi spriten talka simulatzen dute.
+        // Jokoa
+        if (EGOERA == 1)
+        {
+            int jokoaKargatu = false;
+            int puntuazioaPlayer = 0;
+            int puntuazioaCpu = 0;
 
+            if (!jokoaKargatu)
+            {
+                ErakutsiPaloteUrdina(0, 20, 96);
+                ErakutsiPaloteGorria(0, 236, 96);
+                ErakutsiPelotaMorea(0, 128, 96);
+                erakutsiFondoa();
+                jokoaKargatu = true;
+            }
 
-				if ((x == 25) && (Pos == 0))
-				{
-					EGOERA = 1;
-					EzabatuErronboHandia(1, 34, 0);
-					EzabatuErronboa(3, 34, x);
-					EzabatuErronboa(4, 68, b);
-					EzabatuErronboa(5, 100, y);
-					EzabatuErronboa(6, 134, z);
-					EzabatuErronboa(7, 168, a);
-				}
-				if ((b == 25) && (Pos == 1))
-				{
-					EGOERA = 1;
-					EzabatuErronboHandia(1, 34, 0);
-					EzabatuErronboa(3, 34, x);
-					EzabatuErronboa(4, 68, b);
-					EzabatuErronboa(5, 100, y);
-					EzabatuErronboa(6, 134, z);
-					EzabatuErronboa(7, 168, a);
-				}
-				if ((y == 25) && (Pos == 2))
-				{
-					EGOERA = 1;
-					EzabatuErronboHandia(1, 34, 0);
-					EzabatuErronboa(3, 34, x);
-					EzabatuErronboa(4, 68, b);
-					EzabatuErronboa(5, 100, y);
-					EzabatuErronboa(6, 134, z);
-					EzabatuErronboa(7, 168, a);
-				}
-				if ((z == 25) && (Pos == 3))
-				{
-					EGOERA = 1;
-					EzabatuErronboHandia(1, 34, 0);
-					EzabatuErronboa(3, 34, x);
-					EzabatuErronboa(4, 68, b);
-					EzabatuErronboa(5, 100, y);
-					EzabatuErronboa(6, 134, z);
-					EzabatuErronboa(7, 168, a);
-				}
-				if ((a == 25) && (Pos == 4))
-				{
-					EGOERA = 1;
-					EzabatuErronboHandia(1, 34, 0);
-					EzabatuErronboa(3, 34, x);
-					EzabatuErronboa(4, 68, b);
-					EzabatuErronboa(5, 100, y);
-					EzabatuErronboa(6, 134, z);
-					EzabatuErronboa(7, 168, a);
-				}
+            if (TeklaDetektatu())
+            {
+                if (SakatutakoTekla() == SELECT)
+                {
+                    EGOERA = 2; //Pausa egoera
+                }
+            }
 
-			}
+            // Jokalaria irabazlea da
+            if (puntuazioaPlayer == 3)
+            {
+                ezabatuJokoaSpritak();
+                EGOERA = 3; // Irabazlea egoera
+            }
 
+            // CPU-a irabazlea da
+            if (puntuazioaCpu == 3)
+            {
+                ezabatuJokoaSpritak();
+                EGOERA = 3; // Irabazlea egoera
+            }
+        }
 
-			if (EGOERA == 1) {
-				erakutsiover();
-				x = 250;
-				z = 320;
-				a = 290;
-				touchRead(&PANT_DAT);
-				if ((PANT_DAT.px) != 0 || (PANT_DAT.py != 0)) {
-					EGOERA = 0;
-				}
-			}
-		}
-	}
+        // Pausa
+        if (EGOERA == 2)
+        {
+            int pausaKargatu = false;
 
+            if (!pausaKargatu)
+            {
+                erakutsiPausa();
+            }
+        }
+    }
+
+}
+
+void ezabatuJokoaSpritak()
+{
+    ezabatuPaloteUrdina(0, 20, 96);
+    ezabatuPaloteGorria(0, 236, 96);
+    ezabatuPelotaMorea(0, 128, 96);
 }

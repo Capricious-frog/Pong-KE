@@ -34,7 +34,6 @@ void tekEten ()
 
 		EGOERA = 2;
 		ErlojuaMartxanJarri();
-		erakutsiPato();
 	}
 
 	if (SakatutakoTekla() == SELECT)
@@ -46,8 +45,9 @@ void tekEten ()
 
 void tenpEten()
 {
-	static int tik=0;
-	static int seg=0;
+	static int tik = 0;
+	static int tik1 = 0;
+	static int seg = 0;
 	static int seg1 = 0; // TODO: Mirar que hace seg1
 
 	// El codigo que venia	
@@ -90,9 +90,7 @@ void tenpEten()
 
 	}
 
-	if (EGOERA == 1) { seg = 0; seg1 = 0; }// Hasieratu egin behar da
-}
-	
+	if (EGOERA == 1) { seg = 0; seg1 = 0; }// Hasieratu egin behar da	
 }
 
 void etenZerbErrutEzarri()

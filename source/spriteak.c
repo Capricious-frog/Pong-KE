@@ -12,6 +12,10 @@ adibide batean oinarrituta.
 
 u16* gfxerronbo;
 u16* gfxerronboHandia;
+u16* gfxpaloteUrdina;
+u16* gfxpaloteGorria;
+u16* gfxpelotaMorea;
+
 
 
 /* Pantailan erakutsi nahi den sprite bakoitzeko memoria erreserbatu.*/
