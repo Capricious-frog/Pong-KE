@@ -73,8 +73,8 @@ void jokoa01()
 		//sakatzean egoera aldatu
 
     
-	    // Menua
-		if (EGOERA == 0)
+	// Menua
+	if (EGOERA == 0)
         {
             int menuaKargatua = false;
 
@@ -89,9 +89,14 @@ void jokoa01()
 			if (PANT_DAT.px != 0 || PANT_DAT.py != 0)
             {
                 //iprintf("\x1b[22;5HHau idazte proba bat da");
-				ErakutsiErronboa(1, 30, 30);
-				
-				EGOERA = 1; //Jokoa
+				//ErakutsiErronboa(1, 30, 30);
+                iprintf("\x1b[20;5HX:%d", PANT_DAT.px);
+                iprintf("\x1b[22;5HY:%d", PANT_DAT.py);
+
+                if ((PANT_DAT.px >= 108 && PANT_DAT.px <= 144) && (PANT_DAT.py >= 107 && PANT_DAT.py <= 123))
+                {
+				    EGOERA = 1; //Jokoa
+                }
             }
         }
 
@@ -105,10 +110,8 @@ void jokoa01()
 
             if (!jokoaKargatu)
             {
-                ErakutsiPaloteUrdina(0, 20, 96);
-                ErakutsiPaloteGorria(0, 236, 96);
-                ErakutsiPelotaMorea(0, 128, 96);
                 erakutsiFondoa();
+                sortuJokoaSpritak();
                 jokoaKargatu = true;
             }
 
@@ -116,6 +119,7 @@ void jokoa01()
             {
                 if (SakatutakoTekla() == SELECT)
                 {
+                    izkutatuJokoaSpritak();
                     EGOERA = 2; //Pausa egoera
                 }
             }
@@ -143,15 +147,62 @@ void jokoa01()
             if (!pausaKargatu)
             {
                 erakutsiPausa();
+                touchRead(&PANT_DAT);
+                pausaKargatu = true;
             }
+
+            if (PANT_DAT.px >= 87 && PANT_DAT.px <= 167) {
+                if(PANT_DAT.py >= 80 && PANT_DAT.py <= 95)// Continue
+                {
+                    ErakutsiJokoaSpritak();
+                    EGOERA = 1;
+                } 
+                else if(PANT_DAT.py >= 100 && PANT_DAT.py <= 112) // Restart
+                {
+                    sortuJokoaSpritak();
+                    EGOERA = 1;
+                }
+                else if(PANT_DAT.py >= 116 && PANT_DAT.py <= 130) // Exit
+                {
+                    ezabatuJokoaSpritak();
+                    EGOERA = 0;
+                }
+            }
+        }
+
+        if (EGOERA == 3)
+        {
+            // NAH
         }
     }
 
 }
 
+
+void sortuJokoaSpritak()
+{
+    ErakutsiPaloteUrdina(0, 5, 96);
+    ErakutsiPaloteGorria(1, 236, 96);
+    ErakutsiPelotaMorea(2, 128, 96);
+}
+
 void ezabatuJokoaSpritak()
 {
-    ezabatuPaloteUrdina(0, 20, 96);
-    ezabatuPaloteGorria(0, 236, 96);
-    ezabatuPelotaMorea(0, 128, 96);
+    EzabatuPaloteUrdina(0, 5, 96);
+    EzabatuPaloteGorria(1, 236, 96);
+    EzabatuPelotaMorea(2, 128, 96);
+}
+
+void ezkutatuJokoaSpritak()
+{
+    EzkutatuPaloteUrdina(0);
+    EzkutatuPaloteGorria(1);
+    EzkutatuPelotaMorea(2);
+}
+
+void erakutsiJokoaSpritak()
+{
+    ErakutsiPaloteUrdina(0);
+    ErakutsiPaloteGorria(1);
+    ErakutsiPelotaMorea(2);
 }
