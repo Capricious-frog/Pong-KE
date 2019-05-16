@@ -48,3 +48,5 @@ touchPosition PANT_DAT;
 #define True			1
 #define yeet			throw
 extern int EGOERA;
+extern int puntuazioaPlayer;
+extern int puntuazioaCpu;

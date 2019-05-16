@@ -5,10 +5,10 @@ Kode hau garatu da dovotoren "Simple sprite demo" adibidean eta Jaeden Ameronen 
 adibide batean oinarrituta.
 ---------------------------------------------------------------------------------*/
 
-#include <nds.h> 		//nds-rako garatuta dagoen liburutegia
-#include <stdio.h>		//c-ko liburutegi estandarra sarrera eta irteerako funtzioak definitzen dituena
-#include <stdlib.h>		//c-ko liburutegi estandarra memoria erreserbak eta zenbaki konbertsioak egiteko
-#include <unistd.h>		//Sistema eragileen arteko konpatibilitatea ziurtatzeko liburutegia
+#include <nds.h>        //nds-rako garatuta dagoen liburutegia
+#include <stdio.h>      //c-ko liburutegi estandarra sarrera eta irteerako funtzioak definitzen dituena
+#include <stdlib.h>     //c-ko liburutegi estandarra memoria erreserbak eta zenbaki konbertsioak egiteko
+#include <unistd.h>     //Sistema eragileen arteko konpatibilitatea ziurtatzeko liburutegia
 #include "grafikoak.h"
 #include "spriteak.h"
 
@@ -98,13 +98,12 @@ void hasieratuFondoak() {
 
 /* ----       HONAINO       ---- */
 
-void GrafikoakHasieratu()
-{
-	powerOn(POWER_ALL_2D);
+void GrafikoakHasieratu() {
+    powerOn(POWER_ALL_2D);
     lcdMainOnBottom();
     hasieratuBideoa();
     //hasieratuFondoak();
-	consoleDemoInit(); //Goiko pantaila testua erakusteko eta beheko irudiak erakusteko erabiliko da.
+    consoleDemoInit(); //Goiko pantaila testua erakusteko eta beheko irudiak erakusteko erabiliko da.
 }
 
 
@@ -115,18 +114,16 @@ void GrafikoakHasieratu()
 /* Spritentzako memoria hasieratu.*/
 void initSpriteMem() {
 
-	oamInit(&oamMain, SpriteMapping_1D_32, false);
-	oamInit(&oamSub, SpriteMapping_1D_32, false);
+    oamInit(&oamMain, SpriteMapping_1D_32, false);
+    oamInit(&oamSub, SpriteMapping_1D_32, false);
 }
 
 
-
-void HasieratuGrafikoakSpriteak()
-{
-	GrafikoakHasieratu();
-	hasieratuFondoak();
-	initSpriteMem();
-	memoriaErreserbatu();
-	PaletaNagusiaEzarri();
-	SpriteakMemorianGorde();
+void HasieratuGrafikoakSpriteak() {
+    GrafikoakHasieratu();
+    hasieratuFondoak();
+    initSpriteMem();
+    memoriaErreserbatu();
+    PaletaNagusiaEzarri();
+    SpriteakMemorianGorde();
 }
