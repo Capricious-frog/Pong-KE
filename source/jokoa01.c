@@ -22,9 +22,8 @@ void jokoa01()
 	//aldagai baten definizioa
 	int i = 9;
 	// int tekla = 0; //Venia por defecto
-	//EGOERA;	
+	
 	int Pos = 2;
-	int y = 250;
 	int x = 125;
 	int z = 25;
 	int t;
@@ -38,6 +37,8 @@ void jokoa01()
 	int tempmov = 0; // TODO: Que hace esta variable?
 	// tik1;
 	touchPosition PANT_DAT;
+	int puntuazioaPlayer = 0;
+	int puntuazioaCpu = 0;
 
 	// EGOERA = ZAI; // Lo que venia por defecto
 	
@@ -51,9 +52,10 @@ void jokoa01()
 	// Etenak baimendu behar dira. 
 	IME = 1;
 	// Teklatua konfiguratu behar da.
-	konfiguratuTeklatua(0x40ff); // TODO: Zer egiten du 0x40ff
+	konfiguratuTeklatua(0x40ff);
 	// Tenporizadorea konfiguratu behar da.
-	konfiguratuTenporizadorea(0x9999, 0x0042);
+	konfiguratuTenporizadorea(0, 0x00C0);
+    //konfiguratuTenporizadorea(0x9999, 0x0042);
 	// Teklatuaren etenak baimendu behar dira.
 	TekEtenBaimendu();
 	// Tenporizadorearen etenak baimendu behar dira.
@@ -71,14 +73,12 @@ void jokoa01()
 		/*************************************1.JARDUERAN**************************************/
 		//Hemen teklatuaren inkesta egin, sakatu den tekla pantailaratu, eta START
 		//sakatzean egoera aldatu
-
     
 	// Menua
 	if (EGOERA == 0)
-        {
+    {
             int menuaKargatua = false;
 
-            // TODO Llamarlo desde la funcion que carga el menu
             if (!menuaKargatua)
             {
                 touchRead(&PANT_DAT);
@@ -105,11 +105,10 @@ void jokoa01()
         if (EGOERA == 1)
         {
             int jokoaKargatu = false;
-            int puntuazioaPlayer = 0;
-            int puntuazioaCpu = 0;
 
             if (!jokoaKargatu)
             {
+                ErlojuaMartxanJarri();
                 erakutsiFondoa();
                 sortuJokoaSpritak();
                 jokoaKargatu = true;
@@ -119,24 +118,39 @@ void jokoa01()
             {
                 if (SakatutakoTekla() == SELECT)
                 {
-                    izkutatuJokoaSpritak();
+                    ezkutatuJokoaSpritak();
                     EGOERA = 2; //Pausa egoera
+                } 
+                else if (SakatutakoTekla() == A) //TODO hau kendu
+                {
+                    puntuazioaPlayer++;
+                    iprintf("\x1b[3;5HJokalariaren puntuazioa:%d", puntuazioaPlayer);
+                }
+                else if (SakatutakoTekla() == B) //TODO hau kendu
+                {
+                    puntuazioaCpu++; 
+                    iprintf("\x1b[4;5HCPU-aren puntuazioa:%d", puntuazioaCpu);
                 }
             }
 
             // Jokalaria irabazlea da
             if (puntuazioaPlayer == 3)
             {
+                ErlojuaGelditu();
                 ezabatuJokoaSpritak();
                 EGOERA = 3; // Irabazlea egoera
+                puntuazioaPlayer = 0;
+                puntuazioaCpu = 0;
+            } 
+            else if (puntuazioaCpu == 3) // CPU-a irabazlea da
+            {
+                ErlojuaGelditu();
+                ezabatuJokoaSpritak();
+                EGOERA = 3; // Irabazlea egoera
+                puntuazioaPlayer = 0;
+                puntuazioaCpu = 0;
             }
 
-            // CPU-a irabazlea da
-            if (puntuazioaCpu == 3)
-            {
-                ezabatuJokoaSpritak();
-                EGOERA = 3; // Irabazlea egoera
-            }
         }
 
         // Pausa
@@ -151,12 +165,13 @@ void jokoa01()
                 pausaKargatu = true;
             }
 
-            if (PANT_DAT.px >= 87 && PANT_DAT.px <= 167) {
+            if (PANT_DAT.px >= 87 && PANT_DAT.px <= 167)
+            {
                 if(PANT_DAT.py >= 80 && PANT_DAT.py <= 95)// Continue
                 {
-                    ErakutsiJokoaSpritak();
+                    erakutsiJokoaSpritak();
                     EGOERA = 1;
-                } 
+                }
                 else if(PANT_DAT.py >= 100 && PANT_DAT.py <= 112) // Restart
                 {
                     sortuJokoaSpritak();
@@ -168,11 +183,21 @@ void jokoa01()
                     EGOERA = 0;
                 }
             }
+
         }
 
+	// Irabazle/Galtzaile
         if (EGOERA == 3)
         {
-            // NAH
+            if (puntuazioaPlayer == 3) {
+                erakutsiIrabazlea(); // Irabazi
+                ErlojuaMartxanJarri();
+                //ErlojuaGelditu();
+            } else {
+                erakutsiGaltzailea(); // Galdu
+                ErlojuaMartxanJarri();
+                //ErlojuaGelditu();
+            }
         }
     }
 
@@ -181,9 +206,9 @@ void jokoa01()
 
 void sortuJokoaSpritak()
 {
-    ErakutsiPaloteUrdina(0, 5, 96);
-    ErakutsiPaloteGorria(1, 236, 96);
-    ErakutsiPelotaMorea(2, 128, 96);
+    SortuPaloteUrdina(0, 5, 96);
+    SortuPaloteGorria(1, 236, 96);
+    SortuPelotaMorea(2, 128, 96);
 }
 
 void ezabatuJokoaSpritak()
@@ -193,16 +218,16 @@ void ezabatuJokoaSpritak()
     EzabatuPelotaMorea(2, 128, 96);
 }
 
-void ezkutatuJokoaSpritak()
+void ezkutatuJokoaSpritak(int x, int y)
 {
-    EzkutatuPaloteUrdina(0);
-    EzkutatuPaloteGorria(1);
-    EzkutatuPelotaMorea(2);
+    EzabatuPaloteUrdina(0, x, y);
+    EzabatuPaloteGorria(1, x, y);
+    EzabatuPelotaMorea(2, x, y);
 }
 
-void erakutsiJokoaSpritak()
+void erakutsiJokoaSpritak(int x, int y)
 {
-    ErakutsiPaloteUrdina(0);
-    ErakutsiPaloteGorria(1);
-    ErakutsiPelotaMorea(2);
+    SortuPaloteUrdina(0, x, y);
+    SortuPaloteGorria(1, x, y);
+    SortuPelotaMorea(2, x, y);
 }

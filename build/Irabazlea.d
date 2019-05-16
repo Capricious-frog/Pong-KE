@@ -1,0 +1,1 @@
+Irabazlea.o: Irabazlea.s

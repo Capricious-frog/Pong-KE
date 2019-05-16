@@ -1,9 +1,9 @@
 
-//{{BLOCK(AteaIrekita)
+//{{BLOCK(Pausa)
 
 //======================================================================
 //
-//	AteaIrekita, 256x192@16, 
+//	Pausa, 256x192@16, 
 //	Alphabit on.
 //	+ bitmap not compressed
 //	Total size: 98304 = 98304
@@ -14,12 +14,12 @@
 //
 //======================================================================
 
-#ifndef GRIT_ATEAIREKITA_H
-#define GRIT_ATEAIREKITA_H
+#ifndef GRIT_PAUSA_H
+#define GRIT_PAUSA_H
 
-#define AteaIrekitaBitmapLen 98304
-extern const unsigned int AteaIrekitaBitmap[24576];
+#define PausaBitmapLen 98304
+extern const unsigned int PausaBitmap[24576];
 
-#endif // GRIT_ATEAIREKITA_H
+#endif // GRIT_PAUSA_H
 
-//}}BLOCK(AteaIrekita)
+//}}BLOCK(Pausa)

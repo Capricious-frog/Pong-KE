@@ -10,8 +10,7 @@ periferikoak.c
 #include "spriteak.h"
 
 int EGOERA;
-int seg3;
-int x = 250; // TODO: No se utiliza.
+int y = 96;
 
 void tekEten ()
 {
@@ -31,7 +30,6 @@ void tekEten ()
 
 	if (SakatutakoTekla() == START)
 	{
-
 		EGOERA = 2;
 		ErlojuaMartxanJarri();
 	}
@@ -47,50 +45,59 @@ void tenpEten()
 {
 	static int tik = 0;
 	static int tik1 = 0;
-	static int seg = 0;
-	static int seg1 = 0; // TODO: Mirar que hace seg1
-
-	// El codigo que venia	
-	/*if (EGOERA!=ZAI)
+	static int seg = 0; // 512 tik segundu bat da.
+	
+	if (EGOERA == 1)
 	{
-		tik++; 
-		if (tik==5)
-		{
-			seg++;
-			iprintf("\x1b[13;5HPasa diren segunduak=%d", seg);
-			tik=0;
-			if (EGOERA == IREKITA)
-			{
-				seg3++;
-				if (seg3==3)
-				{
-					erakutsiAtea();
-					seg3=0;
-					EGOERA=ITXITA;
-					EzabatuErronboa(1, 5, 5);
-					EzabatuErronboHandia(2, 100, 100);
-				}
-			}
-				
-		}*/
+        iprintf("\x1b[13;5HPasa diren tik-ak=%d", tik);
 
-	if (EGOERA == 2)
-	{
-		tik++;
-		if (tik == 5)
-		{
-			seg1++;
-			seg++;
-			if (seg1 * 25 > 320) { seg1 = 0; }
-			tik1 = seg1;
+        if(tik == 512)
+        {
+            tik = 0;
+            iprintf("\x1b[14;5HPasa diren segunduak=%d", seg);
+            seg++;
+        }
 
-			iprintf("\x1b[13;5HPuntuak=%d", seg);
-			tik = 0;
-		}
+        if(tik1 == 256)        
+        {
+            if(TeklaDetektatu())
+            {
+                if(SakatutakoTekla() == GORA)
+                {
+                    iprintf("\x1b[16;5HTekla GORA sakatua");
+                    y = y - 10;
+                    SortuPaloteUrdina(0, 5, y);
+                }
+                else if (SakatutakoTekla() == BEHERA)
+                {
+                    iprintf("\x1b[16;5HTekla BEHERA sakatua");
+                    y = y + 10;
+                    SortuPaloteUrdina(0, 5, y);
+                }
+            }
+            tik1 = 0;
+        }
 
+        tik++;
+        tik1++; 
 	}
-
-	if (EGOERA == 1) { seg = 0; seg1 = 0; }// Hasieratu egin behar da	
+    else if (EGOERA == 3)
+    {
+        if(tik >= 2048) // 4 Segundu pasa direnean
+        {
+            EGOERA = 0; 
+        }
+        iprintf("\x1b[4;1Hhdjsahdskaj:%d", tik);
+        tik++;
+        
+        
+    }
+    else
+    {
+        iprintf("\x1b[13;5HPasa diren tik-ak=%d", tik);
+        tik = 0;
+        seg = 0;
+    }
 }
 
 void etenZerbErrutEzarri()

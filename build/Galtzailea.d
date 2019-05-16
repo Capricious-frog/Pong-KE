@@ -1,0 +1,1 @@
+Galtzailea.o: Galtzailea.s

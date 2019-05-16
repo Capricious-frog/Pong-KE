@@ -1,0 +1,1 @@
+fondoa.o: fondoa.s
