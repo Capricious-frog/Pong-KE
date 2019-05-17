@@ -10,8 +10,6 @@ adibide batean oinarrituta.
 #include "spriteak.h"
 #include "definizioak.h"
 
-u16 *gfxerronbo;
-u16 *gfxerronboHandia;
 u16 *gfxpaloteUrdina;
 u16 *gfxpaloteGorria;
 u16 *gfxpelotaMorea;

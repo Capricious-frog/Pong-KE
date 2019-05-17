@@ -28,15 +28,10 @@ int norabideaY = 0;
 
 void tekEten() {
 
-//    if (SakatutakoTekla() == START) {
-//        EGOERA = 2;
-//        ErlojuaMartxanJarri();
-//    }
-
-//    if (SakatutakoTekla() == SELECT) {
-//        EGOERA = 0;
-//        EzabatuErronboHandia(1, 0, 150);
-//    }
+    if (SakatutakoTekla() == SELECT && EGOERA == 1) {
+        ezkutatuJokoaSpritak();
+        EGOERA = 2; //Pausa egoera
+    }
 }
 
 void tenpEten() {
@@ -47,15 +42,15 @@ void tenpEten() {
     static int seg = 0; // 512 tik segundu bat da.
 
 
-    iprintf("\x1b[8;5HPuntuazioa:%d     ", puntuazioaPlayer);
-
     /* ----------------- Jokoa ----------------- */
     if (EGOERA == 1) {
-        iprintf("\x1b[5;5HPalote urdina Y=%d", paloteUrdinaY);
 
         if (tik == 512) {
+            iprintf("\x1b[1;5HPuntuazioa:             ");
+            iprintf("\x1b[2;5HJokalaria:%d", puntuazioaPlayer);
+            iprintf("\x1b[3;5HOrdenagailua:%d", puntuazioaCpu);
+            iprintf("\x1b[5;5HPasa diren segunduak=%d", seg);
             tik = 0;
-            iprintf("\x1b[6;5HPasa diren segunduak=%d", seg);
             seg++;
         }
 
@@ -63,11 +58,9 @@ void tenpEten() {
         if (tikPalote == 6) {
             if (TeklaDetektatu()) {
                 if (SakatutakoTekla() == GORA && paloteUrdinaY > 5) {
-                    iprintf("\x1b[7;5HTekla GORA sakatua  ");
                     paloteUrdinaY--;
                     SortuPaloteUrdina(0, 5, paloteUrdinaY);
                 } else if (SakatutakoTekla() == BEHERA && paloteUrdinaY < 171) {
-                    iprintf("\x1b[7;5HTekla BEHERA sakatua");
                     paloteUrdinaY++;
                     SortuPaloteUrdina(0, 5, paloteUrdinaY);
                 }

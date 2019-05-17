@@ -60,12 +60,14 @@ void jokoa01() {
                 menuaKargatua = true;
             }
 
+            iprintf("\x1b[1;5HJOLASTEKO SAKATU BOTOIA");
+
+
             if (PANT_DAT.px != 0 || PANT_DAT.py != 0) {
-                iprintf("\x1b[1;5HPantaila X:%d", PANT_DAT.px);
-                iprintf("\x1b[2;5HPantaila Y:%d", PANT_DAT.py);
 
                 if ((PANT_DAT.px >= 108 && PANT_DAT.px <= 144) && (PANT_DAT.py >= 107 && PANT_DAT.py <= 123)) {
                     sortuJokoaSpritak();
+                    iprintf("\x1b[2;5H                       ");
                     kargatuEgoeraJokoa();
                 }
             }
@@ -74,13 +76,6 @@ void jokoa01() {
 
         /* ----------------- Jokoa ----------------- */
         if (EGOERA == 1) {
-
-            if (TeklaDetektatu()) {
-                if (SakatutakoTekla() == SELECT) {
-                    ezkutatuJokoaSpritak();
-                    EGOERA = 2; //Pausa egoera
-                }
-            }
 
             // Jokalaria irabazlea da
             if (puntuazioaPlayer == 3) {
