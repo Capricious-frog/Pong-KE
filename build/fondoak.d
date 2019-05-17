@@ -61,8 +61,6 @@ fondoak.o: /home/julen/Projects/Pong-KE/source/fondoak.c \
  /opt/devkitpro/libnds/include/nds/arm9/nand.h \
  /home/julen/Projects/Pong-KE/include/fondoak.h \
  /home/julen/Projects/Pong-KE/include/grafikoak.h \
- /home/julen/Projects/Pong-KE/build/Atea.h \
- /home/julen/Projects/Pong-KE/build/AteaIrekita.h \
  /home/julen/Projects/Pong-KE/build/fondoa.h \
  /home/julen/Projects/Pong-KE/build/Galtzailea.h \
  /home/julen/Projects/Pong-KE/build/Irabazlea.h \
@@ -192,10 +190,6 @@ fondoak.o: /home/julen/Projects/Pong-KE/source/fondoak.c \
 /home/julen/Projects/Pong-KE/include/fondoak.h:
 
 /home/julen/Projects/Pong-KE/include/grafikoak.h:
-
-/home/julen/Projects/Pong-KE/build/Atea.h:
-
-/home/julen/Projects/Pong-KE/build/AteaIrekita.h:
 
 /home/julen/Projects/Pong-KE/build/fondoa.h:
 

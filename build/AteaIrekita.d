@@ -1,1 +1,0 @@
-AteaIrekita.o: AteaIrekita.s

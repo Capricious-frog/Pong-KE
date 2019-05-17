@@ -13,8 +13,6 @@ automatikoki sortzen dira, konpilatzerako garaian, baina horretarako gogoratu be
 
 #include "fondoak.h"
 #include "grafikoak.h"
-#include "Atea.h"
-#include "AteaIrekita.h"
 #include "fondoa.h"
 #include "Galtzailea.h"
 #include "Irabazlea.h"
@@ -25,24 +23,6 @@ automatikoki sortzen dira, konpilatzerako garaian, baina horretarako gogoratu be
 static const int DMA_CHANNEL = 3;
 
 /* Pantailaratu nahi den grafiko bakoitzerako horrelako prozedura bat idatzi behar da */
-
-//Atea adibidea
-void erakutsiAtea() {
-
-    dmaCopyHalfWords(DMA_CHANNEL,
-                     AteaBitmap, /* Automatikoki sortzen den aldagaia */
-                     (uint16 *) BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
-                     AteaBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
-}
-
-
-void erakutsiAteaIrekita() {
-
-    dmaCopyHalfWords(DMA_CHANNEL,
-                     AteaIrekitaBitmap, /* Automatikoki sortzen den aldagaia */
-                     (uint16 *) BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
-                     AteaIrekitaBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
-}
 
 //Gure jokoa
 void erakutsiMenua() {

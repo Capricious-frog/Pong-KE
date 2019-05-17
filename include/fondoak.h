@@ -2,5 +2,7 @@
 fondoak.h
 -------------------------------------*/
 
-extern void erakutsiAtea();
-extern void erakutsiAteaIrekita();
+extern void erakutsiMenua();
+extern void erakutsiFondoa();
+extern void erakutsiIrabazlea();
+extern void erakutsiGaltzailea();
