@@ -151,9 +151,9 @@ void sortuJokoaSpritak() {
 }
 
 void ezabatuJokoaSpritak() {
-    EzabatuPaloteUrdina(0, 5, 96);
-    EzabatuPaloteGorria(1, 236, 96);
-    EzabatuPelotaMorea(2, 128, 96);
+    EzabatuPaloteUrdina(0, 5, 90);
+    EzabatuPaloteGorria(1, 236, 90);
+    EzabatuPelotaMorea(2, 120, 90);
 }
 
 void ezkutatuJokoaSpritak(int x, int y) {

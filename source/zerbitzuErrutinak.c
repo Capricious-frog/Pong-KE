@@ -14,11 +14,11 @@ int puntuazioaPlayer = 0;
 int puntuazioaCpu = 0;
 
 int paloteUrdinaX = 5;
-int paloteUrdinaY = 96;
+int paloteUrdinaY = 90;
 int paloteGorriaX = 236;
-int paloteGorriaY = 96;
+int paloteGorriaY = 90;
 int pelotaX = 120;
-int pelotaY = 96;
+int pelotaY = 90;
 // 0 = Jokalariari urbiltzen
 // 1 = Jokalariari urruntzen
 int norabidea = 0;
@@ -39,6 +39,7 @@ void tekEten() {
 void tenpEten() {
     static int tik = 0;
     static int tikPalote = 0;
+    static int tikPelota = 0;
     static int seg = 0; // 512 tik segundu bat da.
 
 
@@ -56,21 +57,41 @@ void tenpEten() {
 
         if (tikPalote == 6) {
             if (TeklaDetektatu()) {
-                if (SakatutakoTekla() == GORA && paloteUrdinaY > 5 ) {
+                if (SakatutakoTekla() == GORA && paloteUrdinaY > 5) {
                     iprintf("\x1b[7;5HTekla GORA sakatua  ");
-                    paloteUrdinaY = paloteUrdinaY - 1;
+                    paloteUrdinaY--;
                     SortuPaloteUrdina(0, 5, paloteUrdinaY);
                 } else if (SakatutakoTekla() == BEHERA && paloteUrdinaY < 171) {
                     iprintf("\x1b[7;5HTekla BEHERA sakatua");
-                    paloteUrdinaY = paloteUrdinaY + 1;
+                    paloteUrdinaY++;
                     SortuPaloteUrdina(0, 5, paloteUrdinaY);
                 }
             }
             tikPalote = 0;
         }
 
+        if (tikPelota == 10) {
+            // Kolisioak egon diren begiratu
+            if (collitionPlayer()) {
+                norabidea = 1;
+            } else if (collitionEnemy()) {
+                norabidea = 0;
+            }
+
+            if (norabidea) {
+                pelotaX++;
+                SortuPelotaMorea(2, pelotaX, pelotaY);
+            } else {
+                pelotaX--;
+                SortuPelotaMorea(2, pelotaX, pelotaY);
+            }
+
+            tikPelota = 0;
+        }
+
         tik++;
         tikPalote++;
+        tikPelota++;
     } else if (EGOERA == 3) {
         if (tik >= 2048) { // 4 Segundu pasa direnean
             puntuazioaPlayer = 0;
@@ -93,12 +114,48 @@ void etenZerbErrutEzarri() {
 }
 
 int collitionPlayer() {
-    if (pelotaX == paloteUrdinaX) {
-        return true;
-    } else if (pelotaY == paloteUrdinaY) {
-        return true;
+
+    iprintf("\x1b[1;5HPantaila X:%d", PANT_DAT.px);
+    iprintf("\x1b[2;5HPantaila Y:%d", PANT_DAT.py);
+    iprintf("\x1b[3;5HpaloteUrdinaX:%d", paloteUrdinaX);
+    iprintf("\x1b[4;5HpaloteUrdinaY Y:%d", paloteUrdinaY);
+
+    touchRead(&PANT_DAT);
+    if ((PANT_DAT.px >= paloteUrdinaX + 7 && PANT_DAT.px <= paloteUrdinaX + 9) &&
+        (PANT_DAT.py >= paloteUrdinaY && PANT_DAT.py <= paloteUrdinaY + 18)) {
+        iprintf("\x1b[20;5HColision!      ");
+    } else {
+        iprintf("\x1b[20;5HNo hay Colision");
     }
 
+
+//    if (pelotaX == paloteUrdinaX) {
+//        return true;
+//    } else if (pelotaY == paloteUrdinaY) {
+//        return true;
+//    }
+//
+//    return false;
+}
+
+int collitionEnemy() {
+
+
+
+
+
+
+
+
+
+
+//    if (pelotaX == paloteGorriaX) {
+//        return true;
+//    } else if (pelotaY == paloteGorriaY) {
+//        return true;
+//    }
+//
+//    return false;
     return false;
 }
 

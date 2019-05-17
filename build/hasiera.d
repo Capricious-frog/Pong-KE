@@ -1,1 +1,0 @@
-hasiera.o: hasiera.s
