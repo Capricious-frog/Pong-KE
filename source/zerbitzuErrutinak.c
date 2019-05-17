@@ -73,20 +73,20 @@ void tenpEten() {
             tikPalote = 0;
         }
 
+        // Paretak detektatu
         if (pelotaX == 0) {
             norabideaX = 1;
-        } else if (pelotaX == 230) {
+        } else if (pelotaX == 245) {
             norabideaX = 0;
         }
 
         if (pelotaY == 0) {
             norabideaY = 1;
         } else if (pelotaY == 176) {
-            norabideaX = 1;
             norabideaY = 0;
         }
 
-
+        // Pelotaren mugimendua
         if (tikPelota == 8) {
             // Kolisioak egon diren begiratu
             if (kolisioaJokalaria()) {
