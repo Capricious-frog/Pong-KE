@@ -23,7 +23,7 @@ int main(void) {
     HasieratuGrafikoakSpriteak();
     EtenakBaimendu();
 
-    //Zuen jokoari dei egingo zaio hemendik
+    // Pong jokoa
     jokoa01();
 
     return (0);

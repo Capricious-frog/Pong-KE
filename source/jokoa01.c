@@ -19,7 +19,6 @@ int kont = 0;
 
 void jokoa01() {
     touchPosition PANT_DAT;
-
     EGOERA = 0;
 
 
@@ -51,7 +50,7 @@ void jokoa01() {
         //Hemen teklatuaren inkesta egin, sakatu den tekla pantailaratu, eta START
         //sakatzean egoera aldatu
 
-        // Menua
+        /* ----------------- Menua ----------------- */
         if (EGOERA == 0) {
             int menuaKargatua = false;
 
@@ -73,7 +72,7 @@ void jokoa01() {
         }
 
 
-        // Jokoa
+        /* ----------------- Jokoa ----------------- */
         if (EGOERA == 1) {
 
             if (TeklaDetektatu()) {
@@ -97,7 +96,7 @@ void jokoa01() {
 
         }
 
-        // Pausa
+        /* ----------------- Pausa ----------------- */
         if (EGOERA == 2) {
             int pausaKargatu = false;
 
@@ -134,7 +133,7 @@ void jokoa01() {
 
         }
 
-        // Irabazle/Galtzaile
+        /* ----------------- Irabazle/Galtzaile ----------------- */
         if (EGOERA == 3) {
             if (puntuazioaPlayer == 3) {
                 erakutsiIrabazlea(); // Irabazi
@@ -167,12 +166,6 @@ void ezkutatuJokoaSpritak(int x, int y) {
     EzabatuPaloteUrdina(0, x, y);
     EzabatuPaloteGorria(1, x, y);
     EzabatuPelotaMorea(2, x, y);
-}
-
-void erakutsiJokoaSpritak(int x, int y) {
-    SortuPaloteUrdina(0, x, y);
-    SortuPaloteGorria(1, x, y);
-    SortuPelotaMorea(2, x, y);
 }
 
 void kargatuEgoeraJokoa() {

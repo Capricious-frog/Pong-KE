@@ -49,7 +49,7 @@ void tenpEten() {
 
     iprintf("\x1b[8;5HPuntuazioa:%d     ", puntuazioaPlayer);
 
-    //Jokoa
+    /* ----------------- Jokoa ----------------- */
     if (EGOERA == 1) {
         iprintf("\x1b[5;5HPalote urdina Y=%d", paloteUrdinaY);
 
@@ -59,6 +59,7 @@ void tenpEten() {
             seg++;
         }
 
+        // Jokalariaren mugimendua
         if (tikPalote == 6) {
             if (TeklaDetektatu()) {
                 if (SakatutakoTekla() == GORA && paloteUrdinaY > 5) {
@@ -71,12 +72,11 @@ void tenpEten() {
                     SortuPaloteUrdina(0, 5, paloteUrdinaY);
                 }
             }
-
             tikPalote = 0;
         }
 
+        //CPU-aren mugimendua
         if (tikCpu == 9) {
-            //CPU-aren mugimendua
             if (paloteGorriaY > pelotaY) {
                 paloteGorriaY--;
                 SortuPaloteGorria(1, paloteGorriaX, paloteGorriaY);
@@ -109,7 +109,8 @@ void tenpEten() {
 
         // Pelotaren mugimendua
         if (tikPelota == 8) {
-            // Kolisioak egon diren begiratu
+
+            // Pelotak zerbait ukitu duen begiratu
             if (kolisioaJokalaria()) {
                 if (!norabideaX) {
                     norabideaX = 1;
@@ -146,13 +147,13 @@ void tenpEten() {
         tikPelota++;
         tikCpu++;
     } else if (EGOERA == 3) {
-        if (tik >= 2048) { // 4 Segundu pasa direnean
+        if (tik >= 2048) {
+            // 4 Segundu pasa direnean
             puntuazioaPlayer = 0;
             puntuazioaCpu = 0;
             EGOERA = 0;
         }
         tik++;
-
 
     } else {
         tik = 0;
@@ -165,6 +166,7 @@ void etenZerbErrutEzarri() {
     irqSet(IRQ_TIMER0, tenpEten);
 }
 
+// Kolisioak palen inguruan
 int kolisioaJokalaria() {
     return (pelotaX + 6 >= paloteUrdinaX + 7 && pelotaX + 6 <= paloteUrdinaX + 9) &&
            (pelotaY >= paloteUrdinaY && pelotaY <= paloteUrdinaY + 18);
@@ -174,4 +176,3 @@ int kolisioaCpu() {
     return (pelotaX + 10 >= paloteGorriaX + 7 && pelotaX + 10 <= paloteGorriaX + 9) &&
            (pelotaY >= paloteGorriaY && pelotaY <= paloteGorriaY + 18);
 }
-

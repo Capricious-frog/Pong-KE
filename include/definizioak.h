@@ -41,9 +41,6 @@ touchPosition PANT_DAT;
 #define R				8 
 #define L				9
 
-#define ZAI				0 // TODO: Quitar esto, era para el codigo de ejemplo
-#define ITXITA			1 // TODO: Quitar esto, era para el codigo de ejemplo
-#define IREKITA			2 // TODO: Quitar esto, era para el codigo de ejemplo
 #define false			0
 #define true			1
 #define yeet			throw

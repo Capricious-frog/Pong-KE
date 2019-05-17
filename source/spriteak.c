@@ -20,8 +20,6 @@ u16 *gfxpelotaMorea;
 /* Pantailan erakutsi nahi den sprite bakoitzeko memoria erreserbatu.*/
 void memoriaErreserbatu() {
     /* Pantaila nagusian gehitu nahi den sprite bakoitzarentzako horrelako bat egin behar da. */
-    gfxerronbo = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
-    gfxerronboHandia = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
     gfxpaloteUrdina = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
     gfxpaloteGorria = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
     gfxpelotaMorea = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
@@ -44,79 +42,6 @@ void PaletaNagusiaEzarri() {
    hurrengo lauak beheko ezkerreko koadrantean eta azkeneko lauak beheko ezkerreko koadrantean. 
    Alboko irudian ikusten den bezala. */
 
-u8 erronbo[256] =
-        {
-                0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2,    //	0,0,0,0,0,0,2,2, 2,2,0,0,0,0,0,0,
-                0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2,    //	0,0,0,0,0,2,2,2, 2,2,2,0,0,0,0,0,
-                0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2,    //	0,0,0,0,2,2,2,2, 2,2,2,2,0,0,0,0,
-                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,    //	0,0,0,2,2,2,2,2, 2,2,2,2,2,0,0,0,
-
-                2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0,    //	0,0,2,2,2,2,2,2, 2,2,2,2,2,2,0,0,
-                2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0,    //	0,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,0,
-                2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0,    //	2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,
-                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,    //	2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,
-
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    //	1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,
-                0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1,    //	1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,
-                0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1,    //	0,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,0,
-                0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,    //	0,0,1,1,1,1,1,1, 1,1,1,1,1,1,0,0,
-
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    //	0,0,0,1,1,1,1,1, 1,1,1,1,1,0,0,0,
-                1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0,    //	0,0,0,0,1,1,1,1, 1,1,1,1,0,0,0,0,
-                1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0,    //	0,0,0,0,0,1,1,1, 1,1,1,0,0,0,0,0,
-                1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,    //	0,0,0,0,0,0,1,1, 1,1,0,0,0,0,0,0,
-        };
-
-u8 erronboHandia[1024] =
-        {
-                0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 2,
-                2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-
-                3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-                3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-
-                3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-                3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-
-                2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2,
-                2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-
-                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-
-                0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1,
-                1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-
-                1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1,
-                1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-
-                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-
-                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0,
-                2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2,
-
-                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2,
-                2, 2, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0,
-
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-                1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
-
-                3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-                3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-
-                3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-                3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1,
-                1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
-        };
 
 u8 paloteUrdina[256] =
         {
@@ -186,102 +111,14 @@ void SpriteakMemorianGorde() {
     int i;
     //16*16ko spriteentzako
     for (i = 0; i < 16 * 16 / 2; i++) {
-        gfxerronbo[i] = erronbo[i * 2] | (erronbo[(i * 2) + 1] << 8);
         gfxpaloteUrdina[i] = paloteUrdina[i * 2] | (paloteUrdina[(i * 2) + 1] << 8);
         gfxpaloteGorria[i] = paloteGorria[i * 2] | (paloteGorria[(i * 2) + 1] << 8);
         gfxpelotaMorea[i] = pelotaMorea[i * 2] | (pelotaMorea[(i * 2) + 1] << 8);
     }
-    //32*32ko spriteentzako
-    for (i = 0; i < 32 * 32 / 2; i++) {
-        gfxerronboHandia[i] = erronboHandia[i * 2] | (erronboHandia[(i * 2) + 1] << 8);
-    }
 }
 
-/* Funtzio honek erronbo bat irudikatuko dut pantailako x-y posizioan. Pantailan ateratzea nahi den erronbo 
+/* Funtzio honek erronbo bat irudikatuko dut pantailako x-y posizioan. Pantailan ateratzea nahi den erronbo
    bakoitzari indize desberdin bat esleitu behar zaio, 0 eta 126 balioen arteko indizea izan daiteke. */
-
-//Erronboen adibidea
-void ErakutsiErronboa(int indizea, int x, int y) {
-
-    oamSet(&oamMain, //main graphics engine context
-           indizea,           //oam index (0 to 127)
-           x, y,   //x and y pixle location of the sprite
-           0,                    //priority, lower renders last (on top)
-           0,                      //this is the palette index if multiple palettes or the alpha value if bmp sprite
-           SpriteSize_16x16,
-           SpriteColorFormat_256Color,
-           gfxerronbo,//+16*16/2,                  //pointer to the loaded graphics
-           -1,                  //sprite rotation data
-           false,               //double the size when rotating?
-           false,            //hide the sprite?
-           false, false, //vflip, hflip
-           false    //apply mosaic
-    );
-
-    oamUpdate(&oamMain);
-}
-
-/*Funtzio honek erronbo baten indizea pasata pantailatik ezabatzen du*/
-void EzabatuErronboa(int indizea, int x, int y) {
-
-    oamSet(&oamMain, //main graphics engine context
-           indizea,           //oam index (0 to 127)
-           x, y,   //x and y pixle location of the sprite
-           0,                    //priority, lower renders last (on top)
-           0,                      //this is the palette index if multiple palettes or the alpha value if bmp sprite
-           SpriteSize_16x16,
-           SpriteColorFormat_256Color,
-           gfxerronbo,//+16*16/2,                  //pointer to the loaded graphics
-           -1,                  //sprite rotation data
-           false,               //double the size when rotating?
-           true,            //hide the sprite?
-           false, false, //vflip, hflip
-           false    //apply mosaic
-    );
-    oamUpdate(&oamMain);
-
-}
-
-void ErakutsiErronboHandia(int indizea, int x, int y) {
-
-    oamSet(&oamMain, //main graphics engine context
-           indizea,           //oam index (0 to 127)
-           x, y,   //x and y pixle location of the sprite
-           0,                    //priority, lower renders last (on top)
-           0,                      //this is the palette index if multiple palettes or the alpha value if bmp sprite
-           SpriteSize_32x32,
-           SpriteColorFormat_256Color,
-           gfxerronboHandia,//+16*16/2,                  //pointer to the loaded graphics
-           -1,                  //sprite rotation data
-           false,               //double the size when rotating?
-           false,            //hide the sprite?
-           false, false, //vflip, hflip
-           false    //apply mosaic
-    );
-
-
-    oamUpdate(&oamMain);
-}
-
-void EzabatuErronboHandia(int indizea, int x, int y) {
-
-    oamSet(&oamMain, //main graphics engine context
-           indizea,           //oam index (0 to 127)
-           x, y,   //x and y pixle location of the sprite
-           0,                    //priority, lower renders last (on top)
-           0,                      //this is the palette index if multiple palettes or the alpha value if bmp sprite
-           SpriteSize_32x32,
-           SpriteColorFormat_256Color,
-           gfxerronboHandia,//+16*16/2,                  //pointer to the loaded graphics
-           -1,                  //sprite rotation data
-           false,               //double the size when rotating?
-           true,            //hide the sprite?
-           false, false, //vflip, hflip
-           false    //apply mosaic
-    );
-    oamUpdate(&oamMain);
-
-}
 
 
 /*---------------Gure jokoa-ren spritak---------------*/
