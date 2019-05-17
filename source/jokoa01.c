@@ -120,6 +120,8 @@ void jokoa01() {
                     puntuazioaCpu = 0;
                     pelotaX = 120;
                     pelotaY = 90;
+                    norabideaX = 0;
+                    norabideaY = 0;
                     sortuJokoaSpritak();
                     ErlojuaGelditu();
                     kargatuEgoeraJokoa();

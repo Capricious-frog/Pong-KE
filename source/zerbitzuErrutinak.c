@@ -75,17 +75,14 @@ void tenpEten() {
 
         if (pelotaX == 0) {
             norabideaX = 1;
-        }
-
-        if (pelotaX == 250) {
+        } else if (pelotaX == 230) {
             norabideaX = 0;
         }
 
         if (pelotaY == 0) {
             norabideaY = 1;
-        }
-
-        if (pelotaY == 176) {
+        } else if (pelotaY == 176) {
+            norabideaX = 1;
             norabideaY = 0;
         }
 
@@ -107,9 +104,9 @@ void tenpEten() {
                 pelotaX--;
                 pelotaY++;
             } else if (norabideaX && !norabideaY) {
-                pelotaX--;
-                pelotaY++;
-            } else {
+                pelotaX++;
+                pelotaY--;
+            } else if (!norabideaX && !norabideaY) {
                 pelotaX--;
                 pelotaY--;
             }

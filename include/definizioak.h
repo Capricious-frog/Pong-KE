@@ -57,3 +57,5 @@ extern int paloteGorriaX;
 extern int paloteGorriaY;
 extern int pelotaX;
 extern int pelotaY;
+extern int norabideaX;
+extern int norabideaY;
