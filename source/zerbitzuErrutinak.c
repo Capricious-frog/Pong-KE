@@ -21,7 +21,10 @@ int pelotaX = 120;
 int pelotaY = 90;
 // 0 = Jokalariari urbiltzen
 // 1 = Jokalariari urruntzen
-int norabidea = 0;
+int norabideaX = 0;
+// 0 = Gora
+// 1 = Behera
+int norabideaY = 0;
 
 void tekEten() {
 
@@ -43,7 +46,7 @@ void tenpEten() {
     static int seg = 0; // 512 tik segundu bat da.
 
 
-    iprintf("\x1b[8;5HPuntuazioa:%d", puntuazioaPlayer);
+    iprintf("\x1b[8;5HPuntuazioa:%d     ", puntuazioaPlayer);
 
     //Jokoa
     if (EGOERA == 1) {
@@ -70,21 +73,31 @@ void tenpEten() {
             tikPalote = 0;
         }
 
-        if (tikPelota == 10) {
+        if (tikPelota == 8) {
             // Kolisioak egon diren begiratu
-            if (collitionPlayer()) {
-                norabidea = 1;
-            } else if (collitionEnemy()) {
-                norabidea = 0;
+            if (kolisioaJokalaria()) {
+                norabideaX = 1;
+                norabideaY = 1;
+            } else if (kolisioaCpu()) {
+                norabideaX = 0;
+                norabideaY = 0;
             }
 
-            if (norabidea) {
+            // TODO
+            if (norabideaX && norabideaY) {
                 pelotaX++;
-                SortuPelotaMorea(2, pelotaX, pelotaY);
+                pelotaY++;
+            } else if (!norabideaX && norabideaY) {
+                pelotaX--;
+                pelotaY++;
+            } else if (norabideaX && !norabideaY) {
+                pelotaX--;
+                pelotaY++;
             } else {
                 pelotaX--;
-                SortuPelotaMorea(2, pelotaX, pelotaY);
+                pelotaY--;
             }
+            SortuPelotaMorea(2, pelotaX, pelotaY);
 
             tikPelota = 0;
         }
@@ -102,7 +115,6 @@ void tenpEten() {
 
 
     } else {
-        iprintf("\x1b[9;5HPasa diren tik-ak=%d", tik);
         tik = 0;
         seg = 0;
     }
@@ -113,15 +125,13 @@ void etenZerbErrutEzarri() {
     irqSet(IRQ_TIMER0, tenpEten);
 }
 
-int collitionPlayer() {
-    //TODO Hau pelotarekiko izan behar da
-    return (PANT_DAT.px >= paloteUrdinaX + 7 && PANT_DAT.px <= paloteUrdinaX + 9) &&
-           (PANT_DAT.py >= paloteUrdinaY && PANT_DAT.py <= paloteUrdinaY + 18);
+int kolisioaJokalaria() {
+    return (pelotaX + 6 >= paloteUrdinaX + 7 && pelotaX + 6 <= paloteUrdinaX + 9) &&
+           (pelotaY >= paloteUrdinaY && pelotaY <= paloteUrdinaY + 18);
 }
 
-int collitionEnemy() {
-    //TODO Hau pelotarekiko izan behar da
-    return (PANT_DAT.px >= paloteGorriaX + 7 && PANT_DAT.px <= paloteGorriaX + 9) &&
-           (PANT_DAT.py >= paloteGorriaY && PANT_DAT.py <= paloteGorriaY + 18);
+int kolisioaCpu() {
+    return (pelotaX + 10 >= paloteGorriaX + 7 && pelotaX + 10 <= paloteGorriaX + 9) &&
+           (pelotaY >= paloteGorriaY && pelotaY <= paloteGorriaY + 18);
 }
 
