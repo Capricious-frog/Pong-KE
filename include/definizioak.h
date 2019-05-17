@@ -44,9 +44,10 @@ touchPosition PANT_DAT;
 #define ZAI				0 // TODO: Quitar esto, era para el codigo de ejemplo
 #define ITXITA			1 // TODO: Quitar esto, era para el codigo de ejemplo
 #define IREKITA			2 // TODO: Quitar esto, era para el codigo de ejemplo
-#define False			0
-#define True			1
+#define false			0
+#define true			1
 #define yeet			throw
+
 extern int EGOERA;
 extern int puntuazioaPlayer;
 extern int puntuazioaCpu;

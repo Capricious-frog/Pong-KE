@@ -15,13 +15,12 @@ adibide batean oinarrituta.
 #include "zerbitzuErrutinak.h"
 #include "fondoak.h"
 
+int kont = 0;
 
 void jokoa01() {
     touchPosition PANT_DAT;
-    int puntuazioaPlayer = 0;
-    int puntuazioaCpu = 0;
 
-    // EGOERA = ZAI; // Lo que venia por defecto
+    EGOERA = 0;
 
 
     //iprintf("\x1b[22;5HHau idazte proba bat da");	//Honek, 22 lerroan eta 5 zutabean hasiko da idazten.
@@ -47,8 +46,6 @@ void jokoa01() {
 
 
 
-    //erakutsiAtea();
-
     while (1) {
         /*************************************1.JARDUERAN**************************************/
         //Hemen teklatuaren inkesta egin, sakatu den tekla pantailaratu, eta START
@@ -67,8 +64,8 @@ void jokoa01() {
             if (PANT_DAT.px != 0 || PANT_DAT.py != 0) {
                 //iprintf("\x1b[22;5HHau idazte proba bat da");
                 //ErakutsiErronboa(1, 30, 30);
-                iprintf("\x1b[20;5HX:%d", PANT_DAT.px);
-                iprintf("\x1b[22;5HY:%d", PANT_DAT.py);
+                iprintf("\x1b[1;5HPantaila X:%d", PANT_DAT.px);
+                iprintf("\x1b[2;5HPantaila Y:%d", PANT_DAT.py);
 
                 if ((PANT_DAT.px >= 108 && PANT_DAT.px <= 144) && (PANT_DAT.py >= 107 && PANT_DAT.py <= 123)) {
                     EGOERA = 1; //Jokoa
@@ -108,15 +105,11 @@ void jokoa01() {
                 ErlojuaGelditu();
                 ezabatuJokoaSpritak();
                 EGOERA = 3; // Irabazlea egoera
-                puntuazioaPlayer = 0;
-                puntuazioaCpu = 0;
             } else if (puntuazioaCpu == 3) // CPU-a irabazlea da
             {
                 ErlojuaGelditu();
                 ezabatuJokoaSpritak();
                 EGOERA = 3; // Irabazlea egoera
-                puntuazioaPlayer = 0;
-                puntuazioaCpu = 0;
             }
 
         }
