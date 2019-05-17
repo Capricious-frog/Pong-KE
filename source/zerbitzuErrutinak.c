@@ -43,6 +43,7 @@ void tenpEten() {
     static int tik = 0;
     static int tikPalote = 0;
     static int tikPelota = 0;
+    static int tikCpu = 0;
     static int seg = 0; // 512 tik segundu bat da.
 
 
@@ -70,13 +71,32 @@ void tenpEten() {
                     SortuPaloteUrdina(0, 5, paloteUrdinaY);
                 }
             }
+
             tikPalote = 0;
+        }
+
+        if (tikCpu == 9) {
+            //CPU-aren mugimendua
+            if (paloteGorriaY > pelotaY) {
+                paloteGorriaY--;
+                SortuPaloteGorria(1, paloteGorriaX, paloteGorriaY);
+            } else {
+                paloteGorriaY++;
+                SortuPaloteGorria(1, paloteGorriaX, paloteGorriaY);
+            }
+            tikCpu = 0;
         }
 
         // Paretak detektatu
         if (pelotaX == 0) {
+            puntuazioaCpu++;
+            pelotaX = 120;
+            pelotaY = 90;
             norabideaX = 1;
         } else if (pelotaX == 245) {
+            puntuazioaPlayer++;
+            pelotaX = 120;
+            pelotaY = 90;
             norabideaX = 0;
         }
 
@@ -86,17 +106,23 @@ void tenpEten() {
             norabideaY = 0;
         }
 
+
         // Pelotaren mugimendua
         if (tikPelota == 8) {
             // Kolisioak egon diren begiratu
             if (kolisioaJokalaria()) {
-                norabideaX = 1;
-                norabideaY = 1;
+                if (!norabideaX) {
+                    norabideaX = 1;
+                }
             } else if (kolisioaCpu()) {
-                norabideaX = 0;
-                norabideaY = 0;
+                if (norabideaX && norabideaY) {
+                    norabideaX = 0;
+                } else if (norabideaX && !norabideaY) {
+                    norabideaY = 1;
+                }
             }
 
+            // Pelota mugitu
             if (norabideaX && norabideaY) {
                 pelotaX++;
                 pelotaY++;
@@ -118,6 +144,7 @@ void tenpEten() {
         tik++;
         tikPalote++;
         tikPelota++;
+        tikCpu++;
     } else if (EGOERA == 3) {
         if (tik >= 2048) { // 4 Segundu pasa direnean
             puntuazioaPlayer = 0;
