@@ -34,8 +34,8 @@ void PaletaNagusiaEzarri() {
     SPRITE_PALETTE[2] = RGB15(0, 31, 0); // 2 baliodun pixelak berdeak izango dira.
     SPRITE_PALETTE[3] = RGB15(0, 0, 31); // 3 baliodun pixelak urdinak izango dira.
     SPRITE_PALETTE[4] = RGB15(33, 150, 243); // 4 baliodun pixelak urdin argiak izango dira.
-    SPRITE_PALETTE[5] = RGB15(237, 28, 36); // 5 baliodun pixelak gorri intentsoak izango dira.
-    SPRITE_PALETTE[6] = RGB15(103, 58, 183); // 6 baliodun pixelak moreak izango dira.
+    SPRITE_PALETTE[5] = RGB15(120, 40, 31); // 5 baliodun pixelak gorri intentsoak izango dira.
+    SPRITE_PALETTE[6] = RGB15(99, 57, 116); // 6 baliodun pixelak moreak izango dira.
 }
 
 /* 16x16 pixeleko Sprite baten definizioa erronbo bat marrazteko */
