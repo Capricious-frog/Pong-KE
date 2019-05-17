@@ -108,18 +108,23 @@ void jokoa01() {
             }
 
             if (PANT_DAT.px >= 87 && PANT_DAT.px <= 167) {
-                if (PANT_DAT.py >= 80 && PANT_DAT.py <= 95)// Continue
-                {
+                if (PANT_DAT.py >= 80 && PANT_DAT.py <= 95) {
+                    // Continue
                     SortuPaloteUrdina(0, paloteUrdinaX, paloteUrdinaY);
                     SortuPaloteGorria(1, paloteGorriaX, paloteGorriaY);
                     SortuPelotaMorea(2, pelotaX, pelotaY);
                     kargatuEgoeraJokoa();
-                } else if (PANT_DAT.py >= 100 && PANT_DAT.py <= 112) // Restart
-                {
+                } else if (PANT_DAT.py >= 100 && PANT_DAT.py <= 112) {
+                    // Restart
+                    puntuazioaPlayer = 0;
+                    puntuazioaCpu = 0;
+                    pelotaX = 120;
+                    pelotaY = 90;
                     sortuJokoaSpritak();
+                    ErlojuaGelditu();
                     kargatuEgoeraJokoa();
-                } else if (PANT_DAT.py >= 116 && PANT_DAT.py <= 130) // Exit
-                {
+                } else if (PANT_DAT.py >= 116 && PANT_DAT.py <= 130) {
+                    // Exit
                     ezabatuJokoaSpritak();
                     EGOERA = 0;
                 }

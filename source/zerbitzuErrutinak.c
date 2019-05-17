@@ -73,6 +73,23 @@ void tenpEten() {
             tikPalote = 0;
         }
 
+        if (pelotaX == 0) {
+            norabideaX = 1;
+        }
+
+        if (pelotaX == 250) {
+            norabideaX = 0;
+        }
+
+        if (pelotaY == 0) {
+            norabideaY = 1;
+        }
+
+        if (pelotaY == 176) {
+            norabideaY = 0;
+        }
+
+
         if (tikPelota == 8) {
             // Kolisioak egon diren begiratu
             if (kolisioaJokalaria()) {
@@ -83,7 +100,6 @@ void tenpEten() {
                 norabideaY = 0;
             }
 
-            // TODO
             if (norabideaX && norabideaY) {
                 pelotaX++;
                 pelotaY++;
