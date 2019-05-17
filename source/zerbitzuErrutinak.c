@@ -114,48 +114,14 @@ void etenZerbErrutEzarri() {
 }
 
 int collitionPlayer() {
-
-    iprintf("\x1b[1;5HPantaila X:%d", PANT_DAT.px);
-    iprintf("\x1b[2;5HPantaila Y:%d", PANT_DAT.py);
-    iprintf("\x1b[3;5HpaloteUrdinaX:%d", paloteUrdinaX);
-    iprintf("\x1b[4;5HpaloteUrdinaY Y:%d", paloteUrdinaY);
-
-    touchRead(&PANT_DAT);
-    if ((PANT_DAT.px >= paloteUrdinaX + 7 && PANT_DAT.px <= paloteUrdinaX + 9) &&
-        (PANT_DAT.py >= paloteUrdinaY && PANT_DAT.py <= paloteUrdinaY + 18)) {
-        iprintf("\x1b[20;5HColision!      ");
-    } else {
-        iprintf("\x1b[20;5HNo hay Colision");
-    }
-
-
-//    if (pelotaX == paloteUrdinaX) {
-//        return true;
-//    } else if (pelotaY == paloteUrdinaY) {
-//        return true;
-//    }
-//
-//    return false;
+    //TODO Hau pelotarekiko izan behar da
+    return (PANT_DAT.px >= paloteUrdinaX + 7 && PANT_DAT.px <= paloteUrdinaX + 9) &&
+           (PANT_DAT.py >= paloteUrdinaY && PANT_DAT.py <= paloteUrdinaY + 18);
 }
 
 int collitionEnemy() {
-
-
-
-
-
-
-
-
-
-
-//    if (pelotaX == paloteGorriaX) {
-//        return true;
-//    } else if (pelotaY == paloteGorriaY) {
-//        return true;
-//    }
-//
-//    return false;
-    return false;
+    //TODO Hau pelotarekiko izan behar da
+    return (PANT_DAT.px >= paloteGorriaX + 7 && PANT_DAT.px <= paloteGorriaX + 9) &&
+           (PANT_DAT.py >= paloteGorriaY && PANT_DAT.py <= paloteGorriaY + 18);
 }
 
