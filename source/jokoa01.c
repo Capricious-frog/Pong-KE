@@ -62,13 +62,12 @@ void jokoa01() {
             }
 
             if (PANT_DAT.px != 0 || PANT_DAT.py != 0) {
-                //iprintf("\x1b[22;5HHau idazte proba bat da");
-                //ErakutsiErronboa(1, 30, 30);
                 iprintf("\x1b[1;5HPantaila X:%d", PANT_DAT.px);
                 iprintf("\x1b[2;5HPantaila Y:%d", PANT_DAT.py);
 
                 if ((PANT_DAT.px >= 108 && PANT_DAT.px <= 144) && (PANT_DAT.py >= 107 && PANT_DAT.py <= 123)) {
-                    EGOERA = 1; //Jokoa
+                    sortuJokoaSpritak();
+                    kargatuEgoeraJokoa();
                 }
             }
         }
@@ -76,27 +75,11 @@ void jokoa01() {
 
         // Jokoa
         if (EGOERA == 1) {
-            int jokoaKargatu = false;
-
-            if (!jokoaKargatu) {
-                ErlojuaMartxanJarri();
-                erakutsiFondoa();
-                sortuJokoaSpritak();
-                jokoaKargatu = true;
-            }
 
             if (TeklaDetektatu()) {
                 if (SakatutakoTekla() == SELECT) {
                     ezkutatuJokoaSpritak();
                     EGOERA = 2; //Pausa egoera
-                } else if (SakatutakoTekla() == A) //TODO hau kendu
-                {
-                    puntuazioaPlayer++;
-                    iprintf("\x1b[3;5HJokalariaren puntuazioa:%d", puntuazioaPlayer);
-                } else if (SakatutakoTekla() == B) //TODO hau kendu
-                {
-                    puntuazioaCpu++;
-                    iprintf("\x1b[4;5HCPU-aren puntuazioa:%d", puntuazioaCpu);
                 }
             }
 
@@ -127,12 +110,14 @@ void jokoa01() {
             if (PANT_DAT.px >= 87 && PANT_DAT.px <= 167) {
                 if (PANT_DAT.py >= 80 && PANT_DAT.py <= 95)// Continue
                 {
-                    erakutsiJokoaSpritak();
-                    EGOERA = 1;
+                    SortuPaloteUrdina(0, paloteUrdinaX, paloteUrdinaY);
+                    SortuPaloteGorria(1, paloteGorriaX, paloteGorriaY);
+                    SortuPelotaMorea(2, pelotaX, pelotaY);
+                    kargatuEgoeraJokoa();
                 } else if (PANT_DAT.py >= 100 && PANT_DAT.py <= 112) // Restart
                 {
                     sortuJokoaSpritak();
-                    EGOERA = 1;
+                    kargatuEgoeraJokoa();
                 } else if (PANT_DAT.py >= 116 && PANT_DAT.py <= 130) // Exit
                 {
                     ezabatuJokoaSpritak();
@@ -160,9 +145,9 @@ void jokoa01() {
 
 
 void sortuJokoaSpritak() {
-    SortuPaloteUrdina(0, 5, 96);
-    SortuPaloteGorria(1, 236, 96);
-    SortuPelotaMorea(2, 128, 96);
+    SortuPaloteUrdina(0, 5, 90);
+    SortuPaloteGorria(1, 236, 90);
+    SortuPelotaMorea(2, 120, 90);
 }
 
 void ezabatuJokoaSpritak() {
@@ -181,4 +166,10 @@ void erakutsiJokoaSpritak(int x, int y) {
     SortuPaloteUrdina(0, x, y);
     SortuPaloteGorria(1, x, y);
     SortuPelotaMorea(2, x, y);
+}
+
+void kargatuEgoeraJokoa() {
+    ErlojuaMartxanJarri();
+    erakutsiFondoa();
+    EGOERA = 1; //Jokoa
 }
